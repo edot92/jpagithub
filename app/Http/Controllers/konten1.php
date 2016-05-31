@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\DeviceRegisters;
+use App\User;
+use App;
+use PDF;
+use Illuminate\Support\Collection;
 class konten1 extends Controller
 {
 	public function __construct()
@@ -18,8 +22,10 @@ class konten1 extends Controller
 	}
 	public function user()
 	{
-		//return view('page.user');
-		return view('page.user');
+
+		$users=User::all();
+
+		return view('page.user')->with(compact('users'));;
 	}
 	public function device_setting()
 	{
@@ -62,6 +68,19 @@ class konten1 extends Controller
 	{
 		//return view('page.user');
 		return view('page.billing');
+	}
+
+		public function cetakbilling()
+	{
+
+	// ambil semua data
+	//$provinsi = Provinsi::all();
+	// mengarahkan view pada file pdf.blade.php di views/provinsi/
+	//$view = View::make('provinsi.pdf', array('provinsi' => $provinsi, 'i' => 0))->render(); 
+	// panggil fungsi dompdf
+$pdf = App::make('dompdf.wrapper');
+$pdf->loadHTML('<h1>Test</h1>');
+return $pdf->stream();
 	}
 	/*
 	public function deviceRegister()

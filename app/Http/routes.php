@@ -29,6 +29,7 @@ Route::get('/device_trending', 'konten1@device_trending');
 Route::get('/device_monitoring', 'konten1@device_monitoring');
 Route::get('/consumption', 'konten1@consumption');
 Route::get('/billing', 'konten1@billing');
+Route::get('/cetakbilling', 'konten1@cetakbilling');
 
 /*
 

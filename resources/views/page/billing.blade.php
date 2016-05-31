@@ -139,14 +139,13 @@
 		    <div class="row pad-top-botm">
          <div class="col-lg-12 col-md-12 col-sm-12">
              <hr />
-             <a class="print btn btn-primary btn-lg" >Print Invoice</a>
+             <a class="print btn btn-primary btn-lg" >cetak mode 1</a>
             
-              <a href="#" class="btn btn-success btn-lg" >Download In Pdf</a>
+              <a href="{{ url('/cetakbilling') }}" class="btn btn-success btn-lg" >cetak mode 2</a>
 
              </div>
          </div>
 		   </div>
-
 @stop
 
 @section('scripts') 
