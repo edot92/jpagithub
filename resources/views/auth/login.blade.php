@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<script type="text/javascript">
+    alert("rev 6/6/2016")
+</script>
  <main id="content">
             <!-- Breadcrumb -->
             <div class="container-fluid">
