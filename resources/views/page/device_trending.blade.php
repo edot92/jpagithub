@@ -7,22 +7,24 @@
         </div>	
         <br></br>	
     </div>
-	
+
+
+
 	<div class="row">
 		<div class = "col-md-12">
-			<div id="container_voltage" style="min-width: 3temppx; min-height: 400px; margin: 0 auto"></div>
+			<div id="container_voltage" style="min-width: 3temppx; min-height: 800px; margin: 0 auto"></div>
 		 </div>
 	</div>
 	
 	<div class="row">
 		<div class = "col-md-12">
-			<div id="container_current" style="min-width: 3temppx; min-height: 400px; margin: 0 auto"></div>
+			<div id="container_current" style="min-width: 3temppx; min-height: 800px; margin: 0 auto"></div>
 		</div>
 	</div>
 	
-	<div class="row">
+	    <div class="row">
 		<div class = "col-md-12">
-			<div id="container_power" style="min-width: 3temppx; min-height: 400px; margin: 0 auto"></div>
+			<div id="container_power" style="min-width: 3temppx; min-height: 800px; margin: 0 auto"></div>
 		</div>
 	</div>
 	
@@ -32,13 +34,17 @@
 	@section('scripts') 
 
 <!-- Include Bootstrap Datepicker -->
-<script type="text/javascript" src="{{ asset('lib/highchart/js/highcharts.js') }}"></script>	
+	
 <script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>	
 <script type="text/javascript" src="{{ asset('js/daterangepicker.js') }}"></script>	
 <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.js') }}"></script>	
 <script type="text/javascript" src="{{ asset('js/daterangepicker.js') }}"></script>	
 <<style type="text/css"  src="{{ asset('js/daterangepicker.css') }}">	
+
 </style>	
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script type="text/javascript" src="https://www.highcharts.com/samples/data/three-series-1000-points.js"></script>
 <!-- Include Date Range Picker -->
 <script type="text/javascript">
 $(document).ready(function(){
@@ -61,27 +67,38 @@ $(document).ready(function(){
 	var valueJamList=[];
 	var valueVr=[];
 	var valueIr=[];
-	var valuePr=[];
+	//var valuePr=[];
 	var valueTotr=[];
 		
 	var valueVs=[];
 	var valueIs=[];
-	var valuePs=[];
+	//var valuePs=[];
 	var valueTots=[];
 	
 	var valueVt=[];
 	var valueIt=[];
-	var valuePt=[];
+	//var valuePt=[];
 	var valueTott=[];
 	
 	var valueVtot=[];
 	var valueItot=[];
-	var valuePtot=[];
+	//var valuePtot=[];
+
+	var valueItot=[];
+	var valueNeutral_Current=[];
+
+	var valuePTotal_Active_Power=[];
+	var valuePTotal_Apparent_Power=[];
+	var valuePTotal_Reactive_Power=[];
+
 	
+
 	
+	/*
 	for(i=0;i<24;i++){
 		valueJamList[i]="Hour : " + i.toString();
 	}
+
 	var temp=24;
 		for(i=0;i<24;i++){
 				temp=temp+1;
@@ -105,14 +122,29 @@ $(document).ready(function(){
 			valuePtot[i]=Math.floor((Math.random() * 10) + temp);
 	}
 	
-	
+	*/
 	
 	
 	$(function () {
+   
+  Highcharts.setOptions({
+  global: {
+    useUTC: false
+  }
+});
 
-		var chartVoltage=$('#container_voltage').highcharts({
+    // Create the chart
+   // $('#container').highcharts('StockChart', {
+		
+		function reloadChart(){
+
+		
+	//	var chartVoltage =$('#container_voltage').highcharts('StockChart', {
+		var chartVoltage=new Highcharts.Chart({
 			chart: {
-				type: 'line'
+				renderTo: 'container_voltage',
+				type: 'spline',
+				 
 			},
 			title: {
 				text: 'POWER METER'
@@ -128,6 +160,7 @@ $(document).ready(function(){
 					text: 'VOLTS'
 				}
 			},
+
 			plotOptions: {
 				line: {
 					dataLabels: {
@@ -136,6 +169,39 @@ $(document).ready(function(){
 					enableMouseTracking: false
 				}
 			},
+			 tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+             pointFormat: ' {point.y:.2f} Volts'
+        },
+			 navigator: {
+			        enabled: true  ,   
+		xAxis: {
+			  
+          labels: {
+          	  rotation: -90,
+                align: 'center',
+                reserveSpace: false,
+                y: -5,
+            style: {
+              color: 'blue'
+            },
+             padding: 1,
+            formatter: function() {
+              return (this.value+1) + ' count';
+            }
+          }
+        }
+			    },
+		 rangeSelector: {
+            selected: 1
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
 			series: [{
 				name: 'PHASE R',
 				data:	valueVr	
@@ -151,7 +217,7 @@ $(document).ready(function(){
 			}]
 		});
 
-		$('#container_current').highcharts({
+		var chartCurrent =$('#container_current').highcharts({
 			chart: {
 				type: 'line'
 			},
@@ -189,10 +255,14 @@ $(document).ready(function(){
 				}, {
 				name: 'PHASE TOTAL',
 				data: valueItot
-				}]
+				}, {
+				name: 'NEUTRAL CURRRENT',
+				data: valueNeutral_Current
+				}
+				]
 		});
 	
-		$('#container_power').highcharts({
+		var chartPower = $('#container_power').highcharts({
 			chart: {
 				type: 'line'
 			},
@@ -219,23 +289,24 @@ $(document).ready(function(){
 				}
 			},
 			series: [{
-				name: 'PHASE R',
-				data: valuePr
+				name: 'Total Active Power',
+				data: valuePTotal_Active_Power
 				}, {
-				name: 'PHASE S',
-				data: valuePs
+				name: 'Total Reactive Power',
+				data: valuePTotal_Reactive_Power
 				}, {
-				name: 'PHASE T',
-				data: valuePt
+				name: 'Total Apparent Power',
+				data: valuePTotal_Apparent_Power
 				}]
 		});
+	}
 
-
-    var chartVoltage = $('#container_voltage').highcharts(),
-        name = false,
-        enableDataLabels = true,
-        enableMarkers = true,
-        color = false;
+	
+		// export 
+		$('#export').click(function() {
+    Highcharts.exportCharts([chartVoltage]);
+});
+ 
 
 
 	$('input[name="daterangeDeviceTrending"]').daterangepicker();
@@ -248,32 +319,94 @@ $(document).ready(function(){
  var url1='{{url('/device_trendingdate')}}';
 $.ajax({
     type: "GET",
-    url: '{{url('/device_trendingdate')}}'+'/2015_06_5',
+    url: '{{url('/device_trendingdate')}}'+'/'+startDateTrending+'/'+endDateTrending,
     data: ''
 }).done(function( msg ) {
 	panjangJson=msg.length;
-	//console.log(msg);
+	console.log(msg);
+		//voltage
+		var valueWaktu=[];
+		while(valueVs.length > 0) { valueVs.pop(); } 
+		while(valueVt.length > 0) { valueVt.pop(); } 
+		while(valueVr.length > 0) { valueVr.pop(); } 
+		while(valueVtot.length > 0) { valueVtot.pop(); } 
+		while(valueWaktu.length > 0) { valueWaktu.pop(); } 
+		//current
+		while(valueIr.length > 0) { valueIr.pop(); } 
+		while(valueIs.length > 0) { valueIs.pop(); } 
+		while(valueIt.length > 0) { valueIt.pop(); } 
+		while(valueItot.length > 0) { valueItot.pop(); } 
+		while(valueNeutral_Current.length > 0) { valueNeutral_Current.pop(); } 
+		//daya
+		while(valuePTotal_Active_Power.length > 0) { valuePTotal_Active_Power.pop(); } 
+		while(valuePTotal_Reactive_Power.length > 0) { valuePTotal_Reactive_Power.pop(); } 
+		while(valuePTotal_Apparent_Power.length > 0) { valuePTotal_Apparent_Power.pop(); } 
+		
+
 	for(x=0;x<panjangJson;x++){
+		//voltage
 		valueVr[x]=parseInt(msg[x].Phase_1_Voltage_LN);//konvert ke int
 		valueVs[x]=parseInt(msg[x].Phase_2_Voltage_LN);//konvert ke int
 		valueVt[x]=parseInt(msg[x].Phase_3_Voltage_LN);//konvert ke int
 		valueVtot[x]=parseInt(msg[x].Average_Voltage_LN);//konvert ke int
+		valueWaktu[x]=moment(msg[x].waktu,"YYYY-MM-DD hh:mm:ss").format("DD-MM-YYYY");//konvert ke data(lib momen.js)
+		//current
+		valueIr[x]=parseInt(msg[x].Phase_1_Current);//konvert ke int
+		valueIs[x]=parseInt(msg[x].Phase_2_Current);//konvert ke int
+		valueIt[x]=parseInt(msg[x].Phase_3_Current);//konvert ke int
+		valueItot[x]=parseInt(msg[x].Total_Current);//konvert ke int
+		valueNeutral_Current[x]=parseInt(msg[x].Neutral_Current);//konvert ke int
+		//daya
+		valuePTotal_Active_Power[x]=parseInt(msg[x].Total_Active_Power);//konvert ke int
+		valuePTotal_Reactive_Power[x]=parseInt(msg[x].Total_Reactive_Power);//konvert ke int
+		valuePTotal_Apparent_Power[x]=parseInt(msg[x].Total_Apparent_Power);//konvert ke int	
 		//console.log(valueVr[x]);
 	}
-
-	//alert((msg.length)) ;
-    //alert((msg[1].Phase_1_Voltage_LN)) ;
-    
-     //  var series = chartVoltage.series[0],
-              //  shift = series.data.length > 20; // shift if the series is 
-                                                 // longer than 20
-
-            // add the point
-            chartVoltage.redraw();
-            chartVoltage.series[0].update(valueVr, true, false,500);
-     		chartVoltage.series[1].update(valueVs, true, false,500);
-     		chartVoltage.series[2].update(valueVt, true, false,500);
+	//alert(valueWaktu[0]);
+            reloadChart();
+      		shift=true;
+  			var  chartVoltage=new  $('#container_voltage').highcharts();
+      // chartVoltage.series[0].setData(valueVr,false);
+      // chartVoltage.series[1].setData(valueVs,false);
+      // chartVoltage.series[2].setData(valueVt,false);
+      // chartVoltage.series[3].setData(valueVtot,false);
+      		//VOLTAGE REDRAW
+			var delayChart=1000;
+          	chartVoltage.series[0].update(valueVr, true, shift,delayChart);
+     		chartVoltage.series[1].update(valueVs, true, shift,delayChart);
+     		chartVoltage.series[2].update(valueVt, true, shift,delayChart);
+     		chartVoltage.series[3].update(valueVtot, true, shift,delayChart);
      		
+     		chartVoltage.xAxis[0].setCategories();
+     		chartVoltage.xAxis[0].setCategories(valueWaktu);
+     		chartVoltage.isDirty = true;
+			chartVoltage.redraw();
+				//current REDRAW
+			var  chartCurrent=new  $('#container_current').highcharts();
+          	chartCurrent.series[0].update(valueIr, true, shift,delayChart);
+     		chartCurrent.series[1].update(valueIs, true, shift,delayChart);
+     		chartCurrent.series[2].update(valueIt, true, shift,delayChart);
+     		chartCurrent.series[3].update(valueItot, true, shift,delayChart);
+     		chartCurrent.series[4].update(valueNeutral_Current, true, shift,delayChart);
+     		chartCurrent.xAxis[0].setCategories();
+     		chartCurrent.xAxis[0].setCategories(valueWaktu);
+     		chartCurrent.isDirty = true;
+			chartCurrent.redraw();
+			//daya
+			var  chartPower=new  $('#container_power').highcharts();
+          	chartPower.series[0].update(valuePTotal_Active_Power, true, shift,delayChart);
+     		chartPower.series[1].update(valuePTotal_Reactive_Power, true, shift,delayChart);
+     		chartPower.series[2].update(valuePTotal_Apparent_Power, true, shift,delayChart);
+     		chartPower.xAxis[0].setCategories();
+     		chartPower.xAxis[0].setCategories(valueWaktu);
+     		chartPower.isDirty = true;
+			chartPower.redraw();
+     		// chartVoltage.xAxis[1].setCategories(valueWaktu);
+     		// chartVoltage.xAxis[2].setCategories(valueWaktu);
+     		// chartVoltage.xAxis[3].setCategories(valueWaktu);
+     	//	        chartVoltage.yAxis[0].min= 0;
+       // chartVoltage.yAxis[0].max= panjangJson;
+      
    // Phase_1_Voltage_LN
 
 
@@ -296,11 +429,7 @@ $.ajax({
         });*/
 });
 
-        // change date
-	$('#datepicker1').datepicker()
-  .on('changeDate', function(ev){
 
-  });
 		
 	});
 </script>

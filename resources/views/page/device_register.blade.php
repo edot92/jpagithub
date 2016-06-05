@@ -2,7 +2,8 @@
 
 	<!-- start: CSS -->
 @section('conten-body')	
-                   <table class=" table striped hovered cell-hovered border bordered" data-role="datatable" data-auto-width="true" id="tabelDeviceRegister_id">
+<div class="table-responsive">
+                   <table class="table table-hover" data-role="datatable" data-auto-width="true" id="tabelDeviceRegister_id">
 					   <thead>
 						   <tr>
 							   <th>id</th>
@@ -88,7 +89,7 @@
 						   </div>
 						   </div>
 						
-
+	   </div> <!-- end table responsive -->
 					<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 

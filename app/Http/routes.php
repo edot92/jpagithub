@@ -60,4 +60,4 @@ Route::get('/useredit/{id?}', 'UserController@edit');
 
 Route::auth();
 
-Route::get('/', 'konten1@index');
+Route::get('/', 'UserController@index');

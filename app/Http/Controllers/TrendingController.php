@@ -52,7 +52,7 @@ public function tes()
         array("name" => "John", "data" => [5,7,3])
         ];
         
-        return view('page.device_trending2', compact('yourFirstChart'));
+        return view('page.device_trending', compact('yourFirstChart'));
     }
 
     /**
