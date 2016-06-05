@@ -305,12 +305,18 @@ $.ajax({
       shift=true;
      chartVoltage=new  $('#container_voltage').highcharts();
       chartVoltage.series[0].setData(valueVr,false);
+      chartVoltage.series[1].setData(valueVs,false);
+      chartVoltage.series[2].setData(valueVt,false);
+      chartVoltage.series[3].setData(valueVtot,false);
          /*   chartVoltage.series[0].update(valueVr, true, shift,500);
      		chartVoltage.series[1].update(valueVs, true, shift,500);
      		chartVoltage.series[2].update(valueVt, true, shift,500);
      		chartVoltage.series[3].update(valueVtot, true, shift,500);
      		*/
      		chartVoltage.xAxis[0].setCategories(valueWaktu);
+     		chartVoltage.xAxis[1].setCategories(valueWaktu);
+     		chartVoltage.xAxis[2].setCategories(valueWaktu);
+     		chartVoltage.xAxis[3].setCategories(valueWaktu);
      	//	        chartVoltage.yAxis[0].min= 0;
        // chartVoltage.yAxis[0].max= panjangJson;
         chartVoltage.xAxis[0].tickInterval = panjangJson;
