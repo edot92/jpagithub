@@ -9,6 +9,9 @@ https://genesisui.com/theme.html?id=alba#download
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+                       
+                        <meta name="_token" content="{!! csrf_token() !!}" />
+        
         <meta name="description" content="JPA REV 1">
         <meta name="author" content="JPA.COM">
         <meta name="keyword" content="JPA">
@@ -35,8 +38,7 @@ https://genesisui.com/theme.html?id=alba#download
 		<!-- add the jQWidgets base styles and one of the theme stylesheets -->
 		<link rel="stylesheet" href="lib/jqwidgets/styles/jqx.base.css" type="text/css" />
 		<link rel="stylesheet" href="lib/jqwidgets/styles/jqx.darkblue.css" type="text/css"/>
-		<script src="{{asset('lib/ajaxCRUD/ajax-crud.js')}}"></script>
-		
+
 		
     </head>
     <!-- BODY options, add following classes to body to change options
@@ -59,14 +61,15 @@ https://genesisui.com/theme.html?id=alba#download
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <div class="dropdown-header text-xs-center">
-                            <strong></strong>
-                        </div>
-                        <a class="dropdown-item" href="{{ url('/logout') }}">
-						<class="img-flag" alt="LOGOUT ">LOGOUT </a>
+  
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            </ul>
                        
-                    </div>
                 </li>
             </ul>
 			
@@ -76,25 +79,25 @@ https://genesisui.com/theme.html?id=alba#download
                 <ul class="nav">
                     <li class="nav-title"></li>
 						<li class="nav-item"><a class="nav-link" href="{{ url('/user') }}"><i class="icon-speedometer">
-						</i> USER <span class="label label-info"></span></a>
+						</i>USER <span class="label label-info"></span></a>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="{{ url('/device_setting') }}"><i class="icon-speedometer">
-							</i> device_setting <span class="label label-info"></span></a>
+							</i>SETTING <span class="label label-info"></span></a>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="{{ url('/device_register') }}"><i class="icon-speedometer">
-							</i> device_register <span class="label label-info"></span></a>
+							</i>REGISTER<span class="label label-info"></span></a>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="{{ url('/device_trending') }}"><i class="icon-speedometer">
-							</i> device_trending <span class="label label-info"></span></a>
+							</i>TRENDING <span class="label label-info"></span></a>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="{{ url('/device_monitoring') }}"><i class="icon-speedometer">
-							</i> device_monitoring <span class="label label-info"></span></a>
+							</i>POWER MONITORING <span class="label label-info"></span></a>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="{{ url('/consumption') }}"><i class="icon-speedometer">
-							</i> consumption <span class="label label-info"></span></a>
+							</i>POWER CONSUMTION <span class="label label-info"></span></a>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="{{ url('/billing') }}"><i class="icon-speedometer">
-							</i> billing <span class="label label-info"></span></a>
+							</i>BILLING <span class="label label-info"></span></a>
 						</li>				 	
                 </ul>
             </div>
@@ -136,7 +139,7 @@ https://genesisui.com/theme.html?id=alba#download
 				-->
             </ol>
            <!-- ISI KONTEN-->
-		   <div class="container-fluid">
+		   <div class="container-fluid" id="container_fluid_id">
                 <div class="animated fadeIn">
                   
                     <!--/.row-->
@@ -178,116 +181,9 @@ https://genesisui.com/theme.html?id=alba#download
         <script src="lib/alba/js/libs/jquery.maskedinput.min.js"></script>
         <script src="lib/alba/js/libs/moment.min.js"></script>
         <script src="lib/alba/js/libs/select2.min.js"></script>
-        <script src="lib/alba/js/libs/daterangepicker.min.js"></script>
+        <!-- <script src="lib/alba/js/libs/daterangepicker.min.js"></script>  -->
         <!-- Custom scripts required by this view -->
-        <script src="lib/alba/js/views/forms.js"></script>
+        <!-- <script src="lib/alba/js/views/forms.js"></script>  -->
 		@yield('scripts')
     </body>
 </html>
-<!--
-<body class="metro bg-steel  ">
-		<div class="app-bar fixed-top darcula" data-role="appbar">
-			<a class="app-bar-element branding">BrandName</a>
-			<span class="app-bar-divider"></span>
-			<ul class="app-bar-menu">
-		<!--	
-		<li><a href="">Dashboard</a></li>
-				<li>
-					<a href="" class="dropdown-toggle">Project</a>
-					<ul class="d-menu" data-role="dropdown">
-						<li><a href="">New project</a></li>
-						<li class="divider"></li>
-						<li>
-							<a href="" class="dropdown-toggle">Reopen</a>
-							<ul class="d-menu" data-role="dropdown">
-								<li><a href="">Project 1</a></li>
-								<li><a href="">Project 2</a></li>
-								<li><a href="">Project 3</a></li>
-								<li class="divider"></li>
-								<li><a href="">Clear list</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li><a href="">Security</a></li>
-				<li><a href="">System</a></li>
-				<li>
-					<a href="" class="dropdown-toggle">Help</a>
-					<ul class="d-menu" data-role="dropdown">
-						<li><a href="">ChatOn</a></li>
-						<li><a href="">Community support</a></li>
-						<li class="divider"></li>
-						<li><a href="">About</a></li>
-					</ul>
-				</li>
-			</ul>
-			
-			<div class="app-bar-element place-right">
-				<span class="dropdown-toggle"><span class="mif-cog"></span> User Name</span>
-				<div class="app-bar-drop-container padding10 place-right no-margin-top block-shadow fg-dark" data-role="dropdown" data-no-close="true" style="width: 220px">
-					<h2 class="text-light">Quick settings</h2>
-					<ul class="unstyled-list fg-dark">
-						<li><a href="" class="fg-white1 fg-hover-yellow">Profile</a></li>
-						<li><a href="" class="fg-white2 fg-hover-yellow">Security</a></li>
-						<li><a href="" class="fg-white3 fg-hover-yellow">Exit</a></li>
-					</ul>
-				</div>
-			</div>
-			
-		</div>
-		
-		<div class="page-content ">
-        <div class="flex-grid no-responsive-future" style="height: 100%;">
-            <div class="row" style="height: 100%">
-                <div class="cell size-x200 " id="cell-sidebar" style="height: 100%">
-                    <ul class="sidebar2 dark bg-grayDark fg-grayDark" style="height: 100%;">
-                        <li @if((Request::is('user')))class="active" @endif><a href="{{ url('/user') }}">
-                            <span class="mif-apps icon"></span>
-                            <span class="title">USER</span>
-							<span class=""></span>
-                        </a></li>
-                        <li @if((Request::is('device_setting')))class="active" @endif><a href="{{ url('/device_setting') }}">
-                            <span class="mif-vpn-publ icon"></span>
-                            <span class="title">DEVICE SETTING</span>
-                            
-                        </a></li>
-                        <li @if((Request::is('device_register')))class="active" @endif><a href="{{ url('/device_register') }}">
-                            <span class="mif-drive-eta icon"></span>
-                            <span class="title">DEVICE REGISTER</span>
-                      
-                        </a></li>
-                        <li @if((Request::is('device_trending')))class="active" @endif><a href="{{ url('/device_trending') }}">
-                            <span class="mif-cloud icon"></span>
-                            <span class="title">DEVICE TRENDING</span>
-                  
-                        </a></li>
-                        <li @if((Request::is('device_monitoring')))class="active" @endif><a href="{{ url('/device_monitoring') }}">
-                            <span class="mif-database icon"></span>
-                            <span class="title">MONITORING</span>
-                    
-                        </a></li>
-                        <li @if((Request::is('consumption')))class="active" @endif><a href="{{ url('/consumption') }}">
-                                               <span class="mif-database icon"></span>
-                            <span class="title">CONSUMPTION</span>
-                         
-                        </a></li>
-                        <li @if((Request::is('billing')))class="active" @endif><a href="{{ url('/billing') }}">
-                                             <span class="mif-database icon"></span>
-                            <span class="title">BILLING</span>
-                          
-                        </a></li>
-                    </ul>
-                </div>
-				
-                <div class="cell auto-size padding20 bg-white" id="cell-content">
-				
-						@yield('conten-body')	
-									
-                </div>
-            </div>
-			
-        </div>
-    </div>
-</body>
-</html>
--->

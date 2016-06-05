@@ -1,15 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App;
 use Illuminate\Http\Request;
-
+use Response;
 use App\Http\Requests;
 use App\DeviceRegisters;
+use App\DeviceValuesDay;
+use App\DeviceValues;
 use App\User;
-use App;
+
 use PDF;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
 class konten1 extends Controller
 {
 	public function __construct()
@@ -50,10 +53,47 @@ class konten1 extends Controller
 		$yourFirstChart["series"] = [
         array("name" => "Jane", "data" => [1,0,4]),
         array("name" => "John", "data" => [5,7,3])
-		];
+		];	
 		return view('page.device_trending', compact('yourFirstChart'));
-		/*return view('page.device_trending');*/
 	}
+
+	/*
+		data ambil hari
+		ex 2016-4-10
+		select data
+		query perjam dan sum+count +average
+		return array (jam ,value)
+	
+    */
+	public function device_trendingDate($waktu)
+	{
+        $valtemp="2015-06-02";
+        $valTempSum="<!DOCTYPE html><html><body>";
+        $x=10;
+        $val;
+        str_replace("_", "-", $waktu);
+      
+        	// $valMin=$valtemp . " ".sprintf('%2d:00:00',$x);
+        	// $valMax=$valtemp ." ".sprintf('%2d:00:59',$x);
+         // jam
+         //for($x=0;$x<24;$x++)
+         //{
+        	$valMin=$waktu . " "."00:00:00";
+        	$valMax=$waktu . " "."23:59:59";
+        	//$valMin="2016-06-05 00:00:00";
+        	//$valMax="2016-06-05 23:00:00";
+
+       $values =App\DeviceValuesDay::valueRangeByDate($valMin,$valMax)->get();
+        	if(count($values)==0) return 0;
+        	foreach ($values as $kolom) 
+        	{
+ 			   $valTempSum= "<p>".$kolom->Phase_1_Voltage_LN .",".$kolom->waktu .",".$valTempSum."</p>";
+
+			}
+		//}
+				return response	( $values)->header('Content-Type', 'application/json');
+	}
+
 	public function device_monitoring()
 	{
 		//return view('page.user');
@@ -78,9 +118,9 @@ class konten1 extends Controller
 	// mengarahkan view pada file pdf.blade.php di views/provinsi/
 	//$view = View::make('provinsi.pdf', array('provinsi' => $provinsi, 'i' => 0))->render(); 
 	// panggil fungsi dompdf
-$pdf = App::make('dompdf.wrapper');
-$pdf->loadHTML('<h1>Test</h1>');
-return $pdf->stream();
+		$pdf = App::make('dompdf.wrapper');
+		$pdf->loadHTML('<h1>Test</h1>');
+		return $pdf->stream();
 	}
 	/*
 	public function deviceRegister()
@@ -90,4 +130,6 @@ return $pdf->stream();
 		return view('test.device')->with(compact('deviceRegisters'));
 	}
 	*/
+	
+
 }

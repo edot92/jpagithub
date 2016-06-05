@@ -66,6 +66,20 @@
                             </div>
                         </div>
 
+			<div class="form-group{{ $errors->has('pilih_user_role') ? ' has-error' : '' }}">
+				  
+			      <select class="form-control col-md-6 col-md-offset-5" name="admin" id="admin" name="" >
+                                    <option>pilih hak akses</option>
+                                    <option value="1">User</option>
+                                    <option value="0">Admin</option>
+                                </select> 
+				  @if ($errors->has('pilih_user_role'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('pilih user role') }}</strong>
+                                    </span>
+                                @endif                      
+			 </div>  
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

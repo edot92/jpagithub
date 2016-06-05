@@ -1,6 +1,6 @@
 	$(document).ready(function(){
 						
-						var url = "/device_register_edit";
+						var url = {{url('/device_register_edit')}};
 					
 							// .. it exists
 						
