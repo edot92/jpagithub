@@ -235,14 +235,39 @@ $(document).ready(function(){
 					text: 'Ampere'
 				}
 			},
-			plotOptions: {
-				line: {
-					dataLabels: {
-						enabled: true
-					},
-					enableMouseTracking: false
-				}
-			},
+					 tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+             pointFormat: ' {point.y:.2f} Volts'
+        },
+			 navigator: {
+			        enabled: true  ,   
+		xAxis: {
+			  
+          labels: {
+          	  rotation: -90,
+                align: 'center',
+                reserveSpace: false,
+                y: -5,
+            style: {
+              color: 'blue'
+            },
+             padding: 1,
+            formatter: function() {
+              return (this.value+1) + ' count';
+            }
+          }
+        }
+			    },
+		 rangeSelector: {
+            selected: 1
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
 			series: [{
 				name: 'PHASE R',
 				data: valueIr
@@ -280,14 +305,39 @@ $(document).ready(function(){
 					text: 'kW'
 				}
 			},
-			plotOptions: {
-				line: {
-					dataLabels: {
-						enabled: true
-					},
-					enableMouseTracking: false
-				}
-			},
+			 tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+             pointFormat: ' {point.y:.2f} Volts'
+        },
+			 navigator: {
+			        enabled: true  ,   
+		xAxis: {
+			  
+          labels: {
+          	  rotation: -90,
+                align: 'center',
+                reserveSpace: false,
+                y: -5,
+            style: {
+              color: 'blue'
+            },
+             padding: 1,
+            formatter: function() {
+              return (this.value+1) + ' count';
+            }
+          }
+        }
+			    },
+		 rangeSelector: {
+            selected: 1
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
 			series: [{
 				name: 'Total Active Power',
 				data: valuePTotal_Active_Power
