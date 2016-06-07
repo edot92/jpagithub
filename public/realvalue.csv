@@ -1,0 +1,12 @@
+1,Voltage (L-N),326,334,397,375
+2,Voltage (L-L),362,330,342,320
+3,Current,357,315,399,306
+4,Cos phi,356,338,301,385
+5,Power Factor,347,396,338,328
+6,Active Power,374,400,324,308
+7,Reactive Power,319,320,352,375
+8,Apparent Power,390,364,398,332
+9,THDV,328,400,338,null
+10,TVDI,388,317,334,null
+11,Frequency,null,null,null,50.01
+12,Neutral Current,null,null,null,1.2

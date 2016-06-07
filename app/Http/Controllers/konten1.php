@@ -9,7 +9,7 @@ use App\DeviceRegisters;
 use App\DeviceValuesDay;
 use App\DeviceValues;
 use App\User;
-
+use Excel;
 use PDF;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -122,14 +122,20 @@ class konten1 extends Controller
 		$pdf->loadHTML('<h1>Test</h1>');
 		return $pdf->stream();
 	}
-	/*
-	public function deviceRegister()
-	{
-		$deviceRegisters = DeviceRegister::paginate(10);
-//		return $deviceRegisters;
-		return view('test.device')->with(compact('deviceRegisters'));
+	public function tes(UserListImport $import)
+    {
+
+        Excel::load('table.csv', function($reader) {
+
+    // Getting all results
+    $results = $reader->get();
+
+    // ->all() is a wrapper for ->get() and will work the same
+   // $results = $reader->all();
+
+});
+        //result
 	}
-	*/
 	
 
 }

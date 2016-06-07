@@ -36,7 +36,7 @@ Route::get('/useredit/{id?}', 'UserController@edit');
 
     $id->id = $request->id;
     $id->register_label_ = $request->register_label_;
-   $id->register_rtu_ = $request->register_rtu_;
+  	 $id->register_rtu_ = $request->register_rtu_;
     $id->register_tcp_ = $request->register_tcp_;
     $id->register_size_ = $request->register_size_;
     $id->register_multiply_ = $request->register_multiply_;
@@ -47,11 +47,9 @@ Route::get('/useredit/{id?}', 'UserController@edit');
 	Route::get('/device_setting', 'konten1@device_setting');
 
 	
-//device_trendingdate/2015_06_5
-	//Route::get('/daterangeDeviceTrending/{startDate}/{endDate}', 'konten1@device_trendingDate');
 	/***********device trending********/
 	Route::get('/device_trending', 'TrendingController@index');
-	Route::get('/device_trendingdate/{waktumin}/{waktumax}','TrendingController@device_trendingByDate');
+	Route::get('/device_trendingdate/{waktumin}/{waktumax}/{jammin}/{jammax}','TrendingController@device_trendingByDate');
 /********end device trending *************/
 	Route::get('/device_monitoring', 'konten1@device_monitoring');
 	Route::get('/consumption', 'konten1@consumption');
@@ -61,3 +59,5 @@ Route::get('/useredit/{id?}', 'UserController@edit');
 Route::auth();
 
 Route::get('/', 'UserController@index');
+
+Route::get('/tes', 'konten1@tes');

@@ -18,7 +18,9 @@ https://genesisui.com/theme.html?id=alba#download
         <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
         <title>JPA</title>
         <!-- Main styles for this application -->
+
         <link href="lib/alba/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 		<!-- lib js -->
 		<!-- add the jQuery script -->
 		<script type="text/javascript" src="{{asset('js/jquery-2.2.4.js')}}"></script>
@@ -35,11 +37,11 @@ https://genesisui.com/theme.html?id=alba#download
 		<script type="text/javascript" src="lib/jqwidgets/jqxgauge.js"></script>
         <script type="text/javascript" src="lib/jqwidgets/jqxscrollbar.js"></script>
     
-		<!-- add the jQWidgets base styles and one of the theme stylesheets -->
+		<!-- add the jQWidgets base styles and one of the theme stylesheets-->
 		<link rel="stylesheet" href="lib/jqwidgets/styles/jqx.base.css" type="text/css" />
-		<link rel="stylesheet" href="lib/jqwidgets/styles/jqx.darkblue.css" type="text/css"/>
+		<link rel="stylesheet" href="lib/jqwidgets/styles/jqx.darkblue.css" type="text/css"/> 
 
-		
+		  @yield('scriptshead')
     </head>
     <!-- BODY options, add following classes to body to change options
 		1. 'compact-nav'     	  - Switch sidebar to minified version (width 50px)
@@ -145,11 +147,11 @@ https://genesisui.com/theme.html?id=alba#download
                     <!--/.row-->
                     <div class="row">
                         <div class="col-md-12">
-                        <div class="card">
+                    <div class="card">
                                 <div class="card-header">
                                  	@yield('conten-body')
-                                     </div>
-                                      </div>
+                                   </div>
+                       </div>
                         </div>
                         <!--/.col-->
                     </div>

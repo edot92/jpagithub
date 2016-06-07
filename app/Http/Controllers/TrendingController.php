@@ -8,6 +8,7 @@ use Response;
 use App\Http\Requests;
 use App\DeviceRegisters;
 use App\DeviceValuesDay;
+use App\DeviceValuesHour;
 use App\DeviceValues;
 use App\User;
 /*
@@ -133,42 +134,30 @@ public function tes()
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function device_trendingByDate(Request $request, $waktumin, $waktumax)
+    public function device_trendingByDate(Request $request, $waktumin, $waktumax, $jammin, $jammax)
     {
         $waktubulan=$request->bulan;
         $waktuTahun=$request->tahun;
-        
-        $valtemp="2015-06-02";
         //$valTempSum="<!DOCTYPE html><html><body>";
         $valTempSum="";
         $x=10;
         $val;
         str_replace("_", "-", $waktumin);
          str_replace("_", "-", $waktumax);
-      
-            // $valMin=$valtemp . " ".sprintf('%2d:00:00',$x);
-            // $valMax=$valtemp ." ".sprintf('%2d:00:59',$x);
-         // jam
-         //for($x=0;$x<24;$x++)
-         //{
-           // $valMin=$waktu . " "."00:00:00";
-            //$valMax=$waktu . " "."23:59:59";
-            //$valMin="2016-06-05 00:00:00";
-            //$valMax="2016-06-05 23:00:00";
-
-          //  $valMin="2016-1-1 23:59:59";
-          //  $valMax="2016-1-5 23:59:59";
-         $valMin=$waktumin." 23:59:59";
-         $valMax=$waktumax." 23:59:59";
-       $values =App\DeviceValuesDay::valueRangeByDate($valMin,$valMax)->get();
+  
+         $valMin=$waktumin." ".$jammin.":00";
+         $valMax=$waktumax." ".$jammax.":59";
+//echo $valMin ."   ". $valMax;
+      // $values =App\DeviceValuesHour::valueRangeByHour($valMin,$valMax)->get();
+         $values =App\DeviceValuesHour::valueRangeByHour($valMin,$valMax)->get();
             if(count($values)==0) return 0;
             foreach ($values as $kolom) 
             {
-               $valTempSum= "<br>".$kolom->Phase_1_Voltage_LN .",".$kolom->waktu .",".$valTempSum."<br>";
-
+               //$valTempSum= "<br>"."" .",".$kolom->waktu .",".$valTempSum."<br>";
+$valTempSum= "<br>"."" .",".$kolom->waktu .",".$valTempSum."<br>";
             }
- //echo $valTempSum;
-        //}
+       //  return $valTempSum;
+     
             return response ( $values)->header('Content-Type', 'application/json');
 }
 
