@@ -9,9 +9,7 @@ https://genesisui.com/theme.html?id=alba#download
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-                       
                         <meta name="_token" content="{!! csrf_token() !!}" />
-        
         <meta name="description" content="JPA REV 1">
         <meta name="author" content="JPA.COM">
         <meta name="keyword" content="JPA">

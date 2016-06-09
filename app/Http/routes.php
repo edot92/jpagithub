@@ -16,18 +16,20 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
+
 	/*************USER*////////////////////
 	Route::get('/user', 'UserController@index');
 	Route::get('/user/{id?}', 'UserController@show');
-Route::get('/useredit/{id?}', 'UserController@edit');
+	Route::get('/useredit/{id?}', 'UserController@edit');
 	Route::get('/userinsert', 'UserController@store');	
 	Route::get('/userdestroy/{id?}', 'UserController@destroy');
-/*************************register ***/
+		/*************************register ***/
 	Route::get('/device_register', 'konten1@device_register');
-//for edit
+
 	Route::get('device_register_edit/{id?}', function($id = null)
 	{
-	$task = DeviceRegisters::find($id);		
+	$task = DeviceRegisters::find($id);
 	return Response::json($task);
 	});
 	Route::get('device_register_edit2/{id?}', function(Request $request , $id)
@@ -52,7 +54,14 @@ Route::get('/useredit/{id?}', 'UserController@edit');
 	Route::get('/device_trendingdate/{waktumin}/{waktumax}/{jammin}/{jammax}','TrendingController@device_trendingByDate');
 /********end device trending *************/
 	Route::get('/device_monitoring', 'konten1@device_monitoring');
+	/*****device consumption ***/
 	Route::get('/consumption', 'konten1@consumption');
+	Route::get('/device_consumptiondate/{waktu}', 'DeviceConsumption@getValueByMonth');
+	Route::get('/device_consumptiondate2/{waktu}', 'DeviceConsumption@getValueByBydate');
+	Route::get('/device_consumptiondate3/{waktu}', 'DeviceConsumption@getValueByHour');
+
+
+	/** end */
 	Route::get('/billing', 'konten1@billing');
 	Route::get('/cetakbilling', 'konten1@cetakbilling');
 
@@ -60,4 +69,4 @@ Route::auth();
 
 Route::get('/', 'UserController@index');
 
-Route::get('/tes', 'konten1@tes');
+// Route::get('/tes', 'konten1@tes');

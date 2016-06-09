@@ -36,8 +36,8 @@
     <div class="col-sm-8">
      MAX COUNT<!-- <input class="form-control"  id="textValueMaxGrafikCount" type="text" placeholder="count" value="30">-->
      <select class="form-control" id="textValueMaxGrafikCount">
-     @for($i=2;$i<=200;$i++)
-     @if($i==30)
+     @for($i=2;$i<=1000;$i++)
+     @if($i==1000)
          <option selected> {{ $i }}</option>
      @else
          <option> {{ $i }}</option>
@@ -61,19 +61,19 @@
 -->
 	<div class="row">
 		<div class = "col-md-12">
-			<div id="container_voltage" style="min-width: 3temppx; min-height: 800px; margin: 0 auto"></div>
+			<div id="container_voltage" style="min-width: 500px; min-height: 800px; margin: 0 auto"></div>
 		 </div>
 	</div>
 	
 	<div class="row">
 		<div class = "col-md-12">
-			<div id="container_current" style="min-width: 3temppx; min-height: 800px; margin: 0 auto"></div>
+			<div id="container_current" style="min-width: 500px; min-height: 800px; margin: 0 auto"></div>
 		</div>
 	</div>
 	
 	    <div class="row">
 		<div class = "col-md-12">
-			<div id="container_power" style="min-width: 3temppx; min-height: 800px; margin: 0 auto"></div>
+			<div id="container_power" style="min-width: 500px; min-height: 800px; margin: 0 auto"></div>
 		</div>
 	</div>
 	
