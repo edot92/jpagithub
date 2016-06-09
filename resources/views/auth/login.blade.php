@@ -3,7 +3,7 @@
 @section('content')
 <script type="text/javascript">
    
-    alert("rev 8/6/2016 - 1")
+    alert("rev 9/6/2016 - 1")
 </script>
  <main id="content">
             <!-- Breadcrumb -->
