@@ -1,185 +1,294 @@
 @extends('test.template')
 @section('conten-body')
-
 <div class="row">
-	 <div class='col-sm-8'>    </div>	
-        <div class='col-sm-4'>
-		<label for="daterange" >PILIH WAKTU</label> 
-			<input type="text" name="daterange" value="01/01/2016 - 01/31/2016" />
-        </div>	
-<br></br>		
+  <div class="col-md-12" ><!--style="height:100px;"-->
+  <form class="form-inline" role="form">
+    <div class="col-md-3" >
+      <div class="form-group " >
+        <label for="datetimepicker10">DATE BILLING</label>
+        <div class='input-group date' id='datetimepicker10'>
+          <input type='text' class="form-control" />
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar">
+            </span>
+          </span>
+        </div>
+      </div>
     </div>
-<div class="row" id="tampilanPrint">
-    <div class="row pad-top-botm ">
-         <div class="col-lg-6 col-md-6 col-sm-6 ">
-            <img src="img/pln.jpg" style="padding-bottom:20px;" /> 
-         </div>
-          <div class="col-lg-6 col-md-6 col-sm-6">
-            
-               <strong>   OxyRed  Technologies  LLC.</strong>
-              <br />
-                  <i>Address :</i> 245/908 , New York Lane,
-              <br />
-                  Forth Street , Deumark,
-              <br />
-                  United States.
-              
-         </div>
-     </div>
-     <div  class="row text-center contact-info">
-         <div class="col-lg-12 col-md-12 col-sm-12">
-             <hr />
-             <span>
-                 <strong>Email : </strong>  info@yourdomain.com 
-             </span>
-             <span>
-                 <strong>Call : </strong>  +95 - 890- 789- 9087 
-             </span>
-              <span>
-                 <strong>Fax : </strong>  +012340-908- 890 
-             </span>
-             <hr />
-         </div>
-     </div>
-     <div  class="row pad-top-botm client-info">
-         <div class="col-lg-6 col-md-6 col-sm-6">
-         <h4>  <strong>Client Information</strong></h4>
-           <strong>  Jhon Deo Chuixae</strong>
-             <br />
-                  <b>Address :</b> 145/908 , New York Lane,
-              <br />
-                 United States.
-             <br />
-             <b>Call :</b> +90-908-567-0987
-              <br />
-             <b>E-mail :</b> info@clientdomain.com
-         </div>
-          <div class="col-lg-6 col-md-6 col-sm-6">
-            
-               <h4>  <strong>Payment Details </strong></h4>
-            <b>Bill Amount :  990 USD </b>
-              <br />
-               Bill Date :  01th August 2014
-              <br />
-               <b>Payment Status :  Paid </b>
-               <br />
-               Delivery Date :  10th August 2014
-              <br />
-               Purchase Date :  30th July 2014
-         </div>
-     </div>
-     <div class="row">
-         <div class="col-lg-12 col-md-12 col-sm-12">
-           <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>S. No.</th>
-                                    <th>Perticulars</th>
-                                    <th>Quantity.</th>
-                                    <th>Unit Price</th>
-                                     <th>Sub Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Website Design</td>
-                                    <td>1</td>
-                                    <td>300 USD</td>
-                                    <td>300 USD</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Plugin Dev.</td>
-                                    <td>2</td>
-                                    <td>200 USD</td>
-                                    <td>400 USD</td>
-                                </tr>
-                                <tr>
-                                     <td>3</td>
-                                    <td>Hosting Domains</td>
-                                    <td>2</td>
-                                    <td>100 USD</td>
-                                    <td>200 USD</td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
-               </div>
-             <hr />
-             <div class="ttl-amts">
-               <h5>  Total Amount : 900 USD </h5>
-             </div>
-             <hr />
-              <div class="ttl-amts">
-                  <h5>  Tax : 90 USD ( by 10 % on bill ) </h5>
-             </div>
-             <hr />
-              <div class="ttl-amts">
-                  <h4> <strong>Bill Amount : 990 USD</strong> </h4>
-             </div>
-         </div>
-     </div>
-      <div class="row">
-         <div class="col-lg-12 col-md-12 col-sm-12">
-            <strong> Important: </strong>
-             <ol>
-                  <li>
-                    This is an electronic generated invoice so doesn't require any signature.
+    
+    <div class="col-md-3" >
+      <div class="form-group">
+        <label for="idtxtUnitPrice">GENERATED ON</label>
+        <input type="text" class="form-control" id="idtxtUnitPrice" readonly="true">
+      </div>
+    </div>
 
-                 </li>
-                 <li>
-                     Please read all terms and polices on  www.yourdomaon.com for returns, replacement and other issues.
-
-                 </li>
-             </ol>
-             </div>
-         </div>
-		    <div class="row pad-top-botm">
-         <div class="col-lg-12 col-md-12 col-sm-12">
-             <hr />
-             <a class="print btn btn-primary btn-lg" >cetak mode 1</a>
-            
-              <a href="{{ url('/cetakbilling') }}" class="btn btn-success btn-lg" >cetak mode 2</a>
-
-             </div>
-         </div>
-		   </div>
-@stop
-
-@section('scripts') 
-
-<script type="text/javascript" src="{{ asset('js/html2canvas.js') }}"></script>	
-
-
-<!-- Include Date Range Picker -->
-<script type="text/javascript">
-$(document).ready(function(){
-   	$('.print').on('click', function(){		
-		  html2canvas($("#tampilanPrint"), {
-	        onrendered: function(canvas) {
-			/*var canvasRatio = canvas.height / canvas.width;
-				var windowRatio = window.innerHeight / window.innerWidth;
-				var width;
-				var height;
-				
-				
-				canvas.style.width = width +1000+ 'px';
-				canvas.style.height = height+2000 + 'px';
-				*/
-	        	$("#page").hide();
-			//	canvas
-			//	document.body.appendChild(canvas);
-		
-	            window.print();
-	           $('canvas').remove();
-	            $("#page").show();
-	        }
-	    });
-	    
-	});
-	});
-	</script>
-
-	@stop
+    <div class=" col-md-3" >
+      <div class="form-group">
+        <label for="txtidPricekw">PRICE / kWH</label>
+        <input type="text" class="form-control" id="txtidPricekw">
+      </div>
+    </div>
+    <div class=" col-md-3" >
+      <button type="button" class="btn btn-default">Default</button>
+    </div>
+  </form>
+</div>
+</div>
+<br>
+<div class="row">
+  <div class='col-sm-3'>
+    <div id="container" style="min-width: 10px; height: 400px; margin: 0 auto"></div>
+  </div>
+  <div class='col-sm-9'>
+    <div id="container2" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
+  </div>
+</div>
+<br>
+<br>
+<div class="row">
+  <div class='col-sm-5'>
+    <div class="panel panel-default">
+      <div class="panel-heading">LAST MONTH</div>
+      <div class="panel-body">
+        <H6>TOTAL ACTIVE POWER</H6>
+        <H6>TOTAL REACTIVE POWER</H6>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+              </tr>
+            </thead>
+            <tr>
+              <th>OFF PEAK ENERGY=</th>  <th>COST OF OFF PEAK=</th>
+              <tr>
+              </tr>
+              <th>ON PEAK ENERGY=</th>    <th>COST OF ON PEAK=</th>
+            </tr>
+            <th></th>                    <th>TOTAL = </th>
+          </table>
+        </div>
+      </div>
+      </div><!-- END PANEL -->
+    </div>
+    <div class='col-sm-5'>
+      <div class="panel panel-default">
+        <div class="panel-heading">THIS MONTH</div>
+        <div class="panel-body">
+          <H6><b>TOTAL ACTIVE POWER</H6>
+          <H6>TOTAL REACTIVE POWER</H6>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                </tr>
+              </thead>
+              <tr>
+                <th>OFF PEAK ENERGY=</th>  <th>COST OF OFF PEAK=</th>
+                <tr>
+                </tr>
+                <th>ON PEAK ENERGY=</th>    <th>COST OF ON PEAK=</th>
+              </tr>
+              <th></th>                    <th>TOTAL = </th>
+            </table>
+          </div>
+        </div>
+        </div><!-- END PANEL -->
+      </div>
+      @stop
+      @section('scripts')
+      <script src="js/angular.min.js"></script>
+      <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
+      <link rel="stylesheet" href="css/font-awesome.min.css">
+      <script type="text/javascript" src="{{ asset('js/moment.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('js/daterangepicker.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('js/daterangepicker.js') }}"></script>
+      <style type="text/css"  src="{{ asset('js/daterangepicker.css') }}"></style>
+      <script src="https://code.highcharts.com/stock/highstock.js"></script>
+      <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+      <link href="css/bootstrap-datetimepicker.css" rel="stylesheet">
+      <script src="js/moment.js"></script>
+      <script src="js/bootstrap-datetimepicker.min.js"></script>
+      <script src="js/locale/id.js"></script>
+      <script type="text/javascript" src="{{ asset('js/html2canvas.js') }}"></script>
+      <!-- Include Date Range Picker -->
+      <script type="text/javascript">
+      $(function () {
+      $('#datetimepicker10').datetimepicker({
+      viewMode: 'years',
+      format: 'MM-YYYY'
+      });
+      //chart 1
+      $('#container').highcharts({
+      chart: {
+      type: 'column'
+      },
+      title: {
+      text: 'World\'s largest cities per 2014'
+      },
+      subtitle: {
+      text: 'Source: <a href="http://en.wikipedia.org/wiki/List_of_cities_proper_by_population">Wikipedia</a>'
+      },
+      xAxis: {
+      type: 'category',
+      labels: {
+      rotation: -45,
+      style: {
+      fontSize: '13px',
+      fontFamily: 'Verdana, sans-serif'
+      }
+      }
+      },
+      yAxis: {
+      min: 0,
+      title: {
+      text: 'Population (millions)'
+      }
+      },
+      legend: {
+      enabled: true
+      },
+      tooltip: {
+      pointFormat: 'Population in 2008: <b>{point.y:.1f} millions</b>'
+      },
+      series: [{
+      name: 'TOTAL ACTIVE POWER',
+      data: [
+      ['PREVIOUS', 23.7],
+      ['NOW', 16.1],
+      ],
+      dataLabels: {
+      enabled: true,
+      rotation: -90,
+      color: '#FFFFFF',
+      align: 'right',
+      format: '{point.y:.1f}', // one decimal
+      y: 10, // 10 pixels down from the top
+      style: {
+      fontSize: '13px',
+      fontFamily: 'Verdana, sans-serif'
+      }
+      }
+      },
+      {
+      name: 'TOTAL REACTIVE POWER',
+      data: [
+      ['PREVIOUS', 23.7],
+      ['NOW', 16.1],
+      ],
+      dataLabels: {
+      enabled: true,
+      rotation: -90,
+      color: '#FFFFFF',
+      align: 'right',
+      format: '{point.y:.1f}kwh', // one decimal
+      y: 10, // 10 pixels down from the top
+      style: {
+      fontSize: '13px',
+      fontFamily: 'Verdana, sans-serif'
+      }
+      }
+      }
+      ]
+      }); // end chart 1
+      var valuePTotal_Active_PowerNow=[];
+      var valuePTotal_Apparent_PowerNow=[];
+      var valuePTotal_Reactive_PowerNow=[];
+      var tanggal=[];
+      var maxTanggal=new Date(2016, 1, 0).getDate();;
+      for(x=0;x<maxTanggal;x++){
+      tanggal[x]=x+1;
+      valuePTotal_Active_PowerNow[x]=x+1;
+      valuePTotal_Reactive_PowerNow[x]=x+1;
+      }
+      $('#container2').highcharts({
+      title: {
+      text: 'Combination chart'
+      },
+      xAxis: {
+      categories: tanggal
+      },
+      labels: {
+      items: [{
+      html: 'Total fruit consumption',
+      style: {
+      left: '50px',
+      top: '18px',
+      color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+      }
+      }]
+      },
+      series: [{
+      type: 'column',
+      name: 'TOTAL ACTIVE POWER',
+      data: valuePTotal_Active_PowerNow
+      }, {
+      type: 'column',
+      name: 'TOTAL REACTIVE POWER',
+      data: valuePTotal_Reactive_PowerNow
+      },
+      {
+      type: 'pie',
+      name: 'average consumption',
+      data: [{
+      name: 'Jane',
+      y: 20,
+      color: Highcharts.getOptions().colors[0] // Jane's color
+      }, {
+      name: 'John',
+      y: 80,
+      color: Highcharts.getOptions().colors[1] // John's color
+      }],
+      center: [100, 80],
+      size: 100,
+      showInLegend: false,
+      dataLabels: {
+      enabled: false
+      }
+      }]
+      });
+      // end chart2
+      });
+      $(document).ready(function(){
+      //alert("tes");
+      });
+      </script>
+      <!--<style type="text/css">
+      .rectangle-box {
+      position: relative;
+      width: 100%;
+      height: 50px;
+      overflow: hidden;
+      background: #91E4FB;
+      marg
+      in-top: 30px;
+      vertical-align: bottom;
+      }
+      .rectangle-box:before {
+      content: "";
+      display: block;
+      padding-top: 50%;
+      }
+      .rectangle-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      }
+      .rectangle-content div {
+      display: table;
+      width: 100%;
+      height: 100%;
+      }
+      .rectangle-content h3 {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      color: #444444;
+      }
+      </style>-->
+      @stop
